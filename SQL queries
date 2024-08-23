@@ -25,6 +25,11 @@ GROUP BY Occupation
 order by count desc;
 
 4. What are the distinct age groups and number of people under each age group?
+select age_group, count(*) as num_people
+from people_demographics
+group by age_group
+order by age_group asc
+
 5. How does the high blood pressure and heart rate influence people with sleep duration lesser than 6 hours?
 --Heart Rate--
 select sleep_duration, quality_of_sleep, heart_rate from sleep_and_health_data
@@ -68,7 +73,18 @@ JOIN sleep_and_health_data s ON p.Person_ID = s.Person_ID
 where 
 p.age between '25' and '30' and s.Sleep_Duration < 8;
 
-10. Is there any relationship between sleep disorders and stress levels in the age group of 25-30?
+10. Is there any relationship between sleep disorders and stress levels in the age group of 25-55?
+SELECT 
+    p.Gender,
+    COUNT(*) AS Number_of_People,
+    s.Sleep_Disorder
+FROM people_demographics p
+JOIN sleep_and_health_data s ON p.Person_ID = s.Person_ID
+where 
+p.age between '25' and '55' and s.Sleep_Disorder != "None"
+group by p.Gender
+order by order by number_of_people desc
+
 11. What are the distinct sleep disorder categories and the most common sleep disorder?
 select sleep_disorder, count(*) as count from sleep_and_health_data
 group by Sleep_Disorder
@@ -154,3 +170,27 @@ order by avg_stress_level desc;
 
 19. What is the distribution of the occupation and the most common occupation?
 `
+-- Distribution by Occupation --
+
+select age_group, occupation, count(*) as num_people
+from people_demographics 
+group by Occupation, age_group
+order by age_group, num_people desc;
+
+-- Most Common Occupation --
+
+WITH people_demographics AS (
+    SELECT 
+        age_group, 
+        occupation, 
+        COUNT(*) AS num_people,
+        ROW_NUMBER() OVER (PARTITION BY age_group ORDER BY COUNT(*) DESC) AS rn
+    FROM people_demographics 
+    GROUP BY age_group, occupation
+)
+SELECT 
+    age_group, 
+    occupation, 
+    num_people
+FROM people_demographics
+WHERE rn = 1;
