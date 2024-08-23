@@ -33,7 +33,7 @@ Insomnia: The individual experiences difficulty falling asleep or staying asleep
 Sleep Apnea: The individual suffers from pauses in breathing during sleep, resulting in disrupted sleep patterns and potential health risks.
 Acknowledgement:
 
-I would like to clarify that the data I am presenting is synthetic and created by me for illustrative purposes.
+I would like to clarify that the data I am presenting is synthetic and I created it for illustrative purposes.
 
 ## Objective 
 This project's primary objective is to learn from Sleep Health and Lifestyle Dataset by investigating the many elements that affect the sleep and Health of people in various demographic categories.
@@ -55,10 +55,10 @@ This project's primary objective is to learn from Sleep Health and Lifestyle Dat
 
 ## Questions to Answer
 - ### Demographics Analysis
-  1. What is the numerical distribution of the Genders.
-  2. What are the distinct types BMIs and number of people under each category.
-  3. What are the distinct categories Occupations and number of people under each category.
-  4. What are the distinct age groups and nnumber of people under each age group.  
+  1. What is the numerical distribution of the Genders?
+  2. What are the distinct types of BMIs and number of people under each category?
+  3. What are the distinct categories of Occupations and number of people under each category?
+  4. What are the distinct age groups and number of people under each age group?  
         
 Snap of the query to create Age groups :
 
@@ -66,15 +66,15 @@ Snap of the query to create Age groups :
 
         
 - ### Sleep and Health Analysis
-  1. How does the high blood pressure and heart rate influence people with sleep duration lesser than 6 hours?
+  1. How do high blood pressure and heart rate influence people with sleep duration of less than 6 hours?
   2. How does sleep duration affect heart rate?
-  3. Which gender is sleeping less and has high stress level?
-  4. What is the average sleep duartion and physical activity and what are their standard deviations?
+  3. Which gender is sleeping less and has a high-stress level?
+  4. What is the average sleep duration and physical activity and what are their standard deviations?
   5. What are the distinct BMI categories?
-  6. Analysis of the sleep duration, quality of sleep and gender of the 25-30 age group.
+  6. Analysis of the sleep duration, quality of sleep, and gender of the 25-30 age group.
   7. Is there any relationship between sleep disorders and stress levels in the age group of 25-30?
   8. What are the distinct sleep disorder categories and the most common sleep disorder?
-  9. Does stress level and occupation have an influence on BMI?
+  9. Do stress levels and occupations influence BMI?
 
 ### Snap of query
 ![occupation, BMI ](https://github.com/user-attachments/assets/a29c632e-779b-47c8-84f4-0de048017676)
@@ -83,22 +83,22 @@ Snap of the query to create Age groups :
    11. What is the average sleep duration of each occupation category?
    12. Which occupation has a sleep duration greater than average yet still experiences a sleep disorder?
 
-  13. What is the most popular occupation among the age groups?
-  14. Which age group has better daily steps count?
+   13. What is the most popular occupation among the age groups?
+   14. Which age group has a better daily steps count?
 
 ### Snap of query
 
 ![occupation, sleep query](https://github.com/user-attachments/assets/39c5288a-7b62-4cc2-a855-f446073d8857)
 
-  13. What is the distribution of the occupation and the most common occupation?
-  14. What is the distribution of the Gender?
-  15. What are the distinct age groups and their distribution?
+  15. What is the distribution of the occupation and the most common occupation?
+  16. What is the distribution of the Gender?
+  17. What are the distinct age groups and their distribution?
 
 ### Snap of Age groups and their Distribution
 
 ![age group and num_people OP](https://github.com/user-attachments/assets/7e513f70-f526-4cad-922a-1b886a05feef)
 
-  16. What is the average physical activity level by Gender?
+  18. What is the average physical activity level by Gender?
 
 ### Snap of Gender and Physical Activity level
 
@@ -122,7 +122,7 @@ Snap of the query to create Age groups :
     b) Avg Physical Activity Level - 59.17
     c) Total Overweight - 148
     d) Total Normal weight - 216
-    e) Sleep Apnea patitents - 78
+    e) Sleep Apnea patients - 78
     f) Insomnia patients - 77
     g) Total Men - 189
     h) Total Women - 185
@@ -187,7 +187,7 @@ Snap of the query to create Age groups :
 
 ![age and pop occuoation](https://github.com/user-attachments/assets/dabca882-7572-463f-ac66-5d6cfa57f0b3)
  
-### [14] People of the age group 41-50 have the most avg. daily steps count and people of the age group 51-60 have the least avg. daily steps count.
+### [14] People of the age group 41-50 have the most avg. daily steps count and people of the age group 51-60 have the lowest avg. daily steps count.
 
 ![age groups and steps](https://github.com/user-attachments/assets/4c3dc295-5b46-4441-a30a-7c03586fdab0)
 
