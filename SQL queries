@@ -1,0 +1,156 @@
+SQL queries written for analysis:
+
+1. What is the numerical distribution of the Genders?
+SELECT 
+    Gender, 
+    COUNT(*) AS Count
+FROM people_demographics
+GROUP BY Gender
+order by count desc;
+
+2. What are the distinct types BMIs and number of people under each category?
+SELECT 
+    BMI_Category, 
+    COUNT(*) AS Count
+FROM sleep_and_health_data
+GROUP BY BMI_Category
+order by count desc
+
+3. What are the distinct categories Occupations and number of people under each category?
+SELECT 
+    Occupation, 
+    COUNT(*) AS Count
+FROM people_demographics
+GROUP BY Occupation
+order by count desc;
+
+4. What are the distinct age groups and number of people under each age group?
+5. How does the high blood pressure and heart rate influence people with sleep duration lesser than 6 hours?
+--Heart Rate--
+select sleep_duration, quality_of_sleep, heart_rate from sleep_and_health_data
+where sleep_duration < 6 and Heart_Rate > 80 or sleep_duration > 6 and heart_rate > 80
+order by Sleep_Duration asc;
+-- Blood Pressure --
+select Person_ID, blood_pressure, Sleep_Duration from sleep_and_health_data
+where Sleep_Duration < 6 and Blood_Pressure > '120/80';
+
+6. Which gender is sleeping less and has high stress level?
+SELECT p.gender, s.sleep_duration, s.stress_level
+FROM sleep_and_health_data s
+JOIN people_demographics p ON p.person_id = s.Person_ID
+WHERE s.Sleep_Duration < 7 and s.Stress_Level > 5
+order by s.Sleep_Duration asc;
+
+7. What is the average sleep duartion and physical activity and what are their standard deviations?
+SELECT 
+    round(AVG(Sleep_Duration), 2) AS Avg_Sleep_Duration,
+    round(STDDEV(Sleep_Duration),2) AS Std_Sleep_Duration,
+    round(AVG(Physical_Activity_Level),2) AS Avg_Physical_Activity_Level,
+    round(STDDEV(Physical_Activity_Level),2) AS Std_Physical_Activity_Level
+FROM sleep_and_health_data;
+
+8. What are the distinct BMI categories?
+SELECT 
+    BMI_Category, 
+    COUNT(*) AS Count
+FROM sleep_and_health_data
+GROUP BY BMI_Category
+order by count desc;
+
+9. Analysis of the sleep duration, quality of sleep and gender of the 25-30 age group?
+SELECT 
+    p.Gender, 
+    p.Age, 
+    s.Sleep_Duration, 
+    s.Quality_of_Sleep
+FROM people_demographics p
+JOIN sleep_and_health_data s ON p.Person_ID = s.Person_ID
+where 
+p.age between '25' and '30' and s.Sleep_Duration < 8;
+
+10. Is there any relationship between sleep disorders and stress levels in the age group of 25-30?
+11. What are the distinct sleep disorder categories and the most common sleep disorder?
+select sleep_disorder, count(*) as count from sleep_and_health_data
+group by Sleep_Disorder
+order by count desc;
+
+12. Does stress level and occupation have an influence on BMI?
+select
+    p.occupation, 
+    count(*)  as num_people,
+    s.BMI_category,
+    s.stress_level
+    from people_demographics p
+    join sleep_and_health_data s on s.Person_ID = p.Person_ID
+  where s.stress_level > (select avg(stress_level) from sleep_and_health_data) and s.BMI_Category = "Overweight"
+  group by p.Occupation
+order by num_people desc;
+
+13. What is the average stress level of each occupation category?
+select p.occupation, round(avg(s.stress_level),2) as avg_stress_level
+from people_demographics p
+join sleep_and_health_data s on s.Person_ID = p.Person_ID
+group by p.occupation
+order by avg_stress_level desc;
+
+14. What is the average sleep duration of each occupation category?
+select p.occupation, round(avg(s.sleep_duration),2) as Average_sleep
+from people_demographics p 
+join sleep_and_health_data s on p.person_id = s.Person_ID
+group by p.occupation
+order by Average_sleep asc;
+
+15. Which occupation has a sleep duration greater than average yet still experiences a sleep disorder?
+
+--Sleep Disorder--
+select p.occupation, count(*) as num_people, s.sleep_disorder
+from people_demographics p
+join sleep_and_health_data s on s.Person_ID = p.Person_ID
+where s.Sleep_Disorder != "None"
+group by p.occupation
+order by num_people desc;
+
+--No Sleep Disorder--
+select p.occupation, count(*) as num_people, s.Sleep_Disorder
+from people_demographics p
+join sleep_and_health_data s on s.Person_ID = p.Person_ID
+where s.Sleep_Disorder = "None"
+group by p.occupation
+order by num_people desc;
+
+16. What is the most popular occupation among the age groups?
+
+WITH people_demographics AS (
+    SELECT 
+        age_group, 
+        occupation, 
+        COUNT(*) AS num_people,
+        ROW_NUMBER() OVER (PARTITION BY age_group ORDER BY COUNT(*) DESC) AS rn
+    FROM people_demographics 
+    GROUP BY age_group, occupation
+)
+SELECT 
+    age_group, 
+    occupation, 
+    num_people
+FROM people_demographics
+WHERE rn = 1;
+
+17. Which age group has better daily steps count?
+
+select p.age_group, round(avg(s.daily_steps),2) as avg_daily_steps
+from people_demographics p
+join sleep_and_health_data s on s.Person_ID = p.Person_ID
+group by p.age_group
+order by avg_daily_steps desc;
+
+18. Which age group has a higher stress level?
+
+select p.age_group, round(avg(s.stress_level),2) as avg_stress_level
+from people_demographics p
+join sleep_and_health_data s on s.Person_ID = p.Person_ID
+group by p.age_group
+order by avg_stress_level desc;
+
+19. What is the distribution of the occupation and the most common occupation?
+`
